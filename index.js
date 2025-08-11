@@ -1,18 +1,4 @@
-const isString = (data) => {
-     return typeof data === "string"
-}
-
-const isDecimal = (data) => {
-     return !Number.isInteger(parseFloat(data))
-}
-
-const hasLetter = (data) => {
-     const letters = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ"
-     for (let position = 0 ; position < letters.length ; position++) {
-          if (data.includes(letters[position])) return true
-          return false
-     }
-}
+import { hasLetters, isDecimal, isString } from "./utils/index.js"
 
 const convertDecimalToOther = (number, base) => {
      let digitChars  = '0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZ'
