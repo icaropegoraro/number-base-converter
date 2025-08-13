@@ -1,7 +1,9 @@
-import { hasLetters, isDecimal, isString } from "./utils/index.js"
+import { hasLetters, isDecimal, isString, hasForbiddenDigits } from "./utils/index.js"
+
+let digitChars  = '0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZ'
 
 const convertDecimalToOther = (number, base) => {
-     let digitChars  = '0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZ'
+
      let convertedNumber = ''
 
      if (!isString(number) || !isString(base)) {
@@ -50,6 +52,10 @@ const convertOtherToDecimal = (number, base) => {
 
      let isEmpty = number === ''
 
+     if (hasForbiddenDigits(digitChars, number, base)) {
+          return console.log('Essa base não aceita esse número')
+     }
+
      if (isEmpty) {
           return console.log('Insira um número não nulo')
      }
@@ -71,5 +77,5 @@ const convertOtherToDecimal = (number, base) => {
      return convertedNumber
 }
 
-convertDecimalToOther("12", "2.5")
+//convertDecimalToOther("12", "2.5")
 convertOtherToDecimal('1100', '2')
