@@ -53,7 +53,7 @@ const convertOtherToDecimal = (number, base) => {
      let isEmpty = number === ''
 
      if (hasForbiddenDigits(digitChars, number, base)) {
-          return console.log('Essa base não aceita esse número')
+          return console.log('Essa base não aceita esse número (ex: 1200 (base binário) não existe, pois o caractere "2" não existe na base binária).')
      }
 
      if (isEmpty) {
@@ -61,7 +61,7 @@ const convertOtherToDecimal = (number, base) => {
      }
 
      if (!isString(number) || !isString(base)) {
-          return console.log('Insira o número em formato de string (ex: convertOtherToDecimal("1100", "2")')
+          return console.log('Insira o número em formato de string (ex: convertOtherToDecimal("1100", "2").')
      }
 
      number = number.split('').reverse().join('')
@@ -77,5 +77,5 @@ const convertOtherToDecimal = (number, base) => {
      return convertedNumber
 }
 
-//convertDecimalToOther("12", "2.5")
+convertDecimalToOther("12", "2.5")
 convertOtherToDecimal('1100', '2')
