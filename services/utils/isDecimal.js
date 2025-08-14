@@ -1,3 +1,4 @@
 export const isDecimal = (data) => {
-     return !Number.isInteger(parseFloat(data))
+     result = !Number.isInteger(parseFloat(data))
+     return result
 }

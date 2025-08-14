@@ -1,4 +1,4 @@
-import { hasLetters, isDecimal, isString, hasForbiddenDigits } from "./utils/index.js"
+import {  isDecimal, isString, hasForbiddenDigits } from "./utils/index.js"
 
 let digitChars  = '0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZ'
 
@@ -53,7 +53,7 @@ const convertOtherToDecimal = (number, base) => {
      let isEmpty = number === ''
 
      if (hasForbiddenDigits(digitChars, number, base)) {
-          return console.log('Essa base não aceita esse número (ex: 1200 (base binário) não existe, pois o caractere "2" não existe na base binária).')
+          return console.log('Essa base não aceita esse número (ex: 1200 (base binário) não existe, pois o caractere "2" não existe na base binária')
      }
 
      if (isEmpty) {
@@ -77,5 +77,5 @@ const convertOtherToDecimal = (number, base) => {
      return convertedNumber
 }
 
-convertDecimalToOther("12", "2.5")
-convertOtherToDecimal('1100', '2')
+convertDecimalToOther("12", "2")
+convertOtherToDecimal('1300', '2')
