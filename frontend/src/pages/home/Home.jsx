@@ -7,6 +7,9 @@ export const Home = () => {
     const [number, setNumber] = useState()
     const [base, setBase] = useState()
     const [newBase, setNewBase] = useState()
+    const [result, setResult] = useState()
+
+    
 
     return (
         <Box
@@ -18,7 +21,7 @@ export const Home = () => {
                 backgroundColor: "#f5f5f5",
                 borderRadius: 2,
             }}
-            >
+        >
             <TextField
                 label="Número"
                 variant="outlined"
@@ -51,6 +54,7 @@ export const Home = () => {
                 variant="outlined"
                 fullWidth
                 sx={{ maxWidth: 250 }}
+                value={result}
                 disabled
             />
         </Box>

@@ -1,24 +1,36 @@
-import {  isDecimal, isString, hasForbiddenDigits } from "./utils/index.js"
+import { hasForbiddenDigits, isString, isEmpty } from './utils/index.js'
 
-let digitChars  = '0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZ'
-
-const convertDecimalToOther = (number, base) => {
+export const convert = ((number, base, newBase) => {
+     const digitChars  = '0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZ'
+     let decimalNumber = 0
 
      let convertedNumber = ''
-
-     if (!isString(number) || !isString(base)) {
-          return console.log('Insira o número em formato de string (ex: convertDecimalToOther("12", "2")')
+     
+     if (isEmpty([number, base, newBase])) {
+          return console.log('Insira um número que não seja vazio')
+     }
+     
+     if (hasForbiddenDigits(digitChars, number, base)) {
+          return console.log('Essa base não aceita algum caractere de seu número')
      }
 
-     if (isDecimal(number) || isDecimal(base)) {
-          return console.log('Insira um número ou base que não seja decimal')
+     if (!isString(number) || !isString(base) || !isString(newBase)) {
+          return console.log('Insira o número em formato de string (ex: convertOtherToDecimal("1100", "2").')
      }
 
-     number = parseInt(number)
+     number = number.split('').reverse().join('')
      base = parseInt(base)
+
+     for (let charIndex = 0; charIndex <= (number.length - 1); charIndex++) {
+          let numberToAdd = parseInt(number[charIndex]) * base ** charIndex
+          decimalNumber += numberToAdd
+     }
+
+     number = decimalNumber
+
      let absoluteValue = Math.abs(number)
 
-     if (isNaN(number) || isNaN(base)) {
+     if (isNaN(number) || isNaN(newBase)) {
           return console.log("Insira um número válido no número ou nas bases")
      }
 
@@ -31,10 +43,9 @@ const convertDecimalToOther = (number, base) => {
           return convertedNumber
      }
 
-
      while (absoluteValue > 0) {
-          let remainder = (absoluteValue % base)
-          absoluteValue = Math.floor(absoluteValue / base)
+          let remainder = (absoluteValue % newBase)
+          absoluteValue = Math.floor(absoluteValue / newBase)
           convertedNumber = digitChars[remainder] + convertedNumber
      }
 
@@ -44,38 +55,4 @@ const convertDecimalToOther = (number, base) => {
 
      console.log(convertedNumber)
 
-     return convertedNumber
-}
-
-const convertOtherToDecimal = (number, base) => {
-     let convertedNumber = 0
-
-     let isEmpty = number === ''
-
-     if (hasForbiddenDigits(digitChars, number, base)) {
-          return console.log('Essa base não aceita esse número (ex: 1200 (base binário) não existe, pois o caractere "2" não existe na base binária')
-     }
-
-     if (isEmpty) {
-          return console.log('Insira um número não nulo')
-     }
-
-     if (!isString(number) || !isString(base)) {
-          return console.log('Insira o número em formato de string (ex: convertOtherToDecimal("1100", "2").')
-     }
-
-     number = number.split('').reverse().join('')
-     base = parseInt(base)
-
-     for (let charIndex = 0; charIndex <= (number.length - 1); charIndex++) {
-          let numberToAdd = parseInt(number[charIndex]) * base ** charIndex
-          convertedNumber += numberToAdd
-     }
-
-     console.log(`${convertedNumber}`)
-
-     return convertedNumber
-}
-
-convertDecimalToOther("12", "2")
-convertOtherToDecimal('1300', '2')
+})("1100", "", "10")
