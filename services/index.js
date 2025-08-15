@@ -34,8 +34,8 @@ export const convert = (number, base, newBase) => {
           return console.log("Insira um número válido no número ou nas bases")
      }
 
-     const isNegative = number < 0
-     const isZero = number === 0
+     const isNegative = numberInDecimal < 0
+     const isZero = numberInDecimal === 0
 
      if (isZero) {
           resultNumber = '0'
@@ -55,4 +55,5 @@ export const convert = (number, base, newBase) => {
 
      console.log(resultNumber)
 
+     return resultNumber
 }
