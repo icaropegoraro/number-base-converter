@@ -9,8 +9,6 @@ export const Home = () => {
     const [newBase, setNewBase] = useState()
     const [result, setResult] = useState()
 
-    
-
     return (
         <Box
             sx={{

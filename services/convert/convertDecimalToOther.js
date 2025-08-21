@@ -4,7 +4,7 @@ let digitChars  = '0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZ'
 
 export const convertDecimalToOther = (number, base) => {
 
-     let convertedNumber = ''
+    let convertedNumber = ''
 
      if (!isString(number) || !isString(base)) {
           return console.log('Insira o número em formato de string (ex: convertDecimalToOther("12", "2")')
