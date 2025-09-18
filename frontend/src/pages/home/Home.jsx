@@ -1,60 +1,94 @@
-import { Box, TextField } from '@mui/material'
-import ArrowForwardIcon from '@mui/icons-material/ArrowForward'
-import { useState } from 'react'
+import { Box, TextField, Paper, Typography, Stack } from '@mui/material'
+import SyncAltIcon from '@mui/icons-material/SyncAlt'
+import { useState, useEffect } from 'react'
+import { convertNumber } from '../../services/index.js'
 
 export const Home = () => {
+    const [number, setNumber] = useState('1010')
+    const [base, setBase] = useState('2')
+    const [newBase, setNewBase] = useState('10')
+    
+    const [result, setResult] = useState('')
+    const [error, setError] = useState(null)
 
-    const [number, setNumber] = useState()
-    const [base, setBase] = useState()
-    const [newBase, setNewBase] = useState()
-    const [result, setResult] = useState()
+    useEffect(() => {
+        const handler = setTimeout(() => {
+            const { 
+                result: convertedResult, 
+                error: conversionError 
+            } = convertNumber(number, base, newBase)
+
+            setResult(convertedResult)
+            setError(conversionError)
+        }, 300)
+
+        return () => {
+            clearTimeout(handler)
+        }
+    }, [number, base, newBase])
 
     return (
-        <Box
-            sx={{
-                display: "flex",
-                alignItems: "center",
-                gap: 2,
-                p: 2,
-                backgroundColor: "#f5f5f5",
-                borderRadius: 2,
-            }}
-        >
-            <TextField
-                label="Número"
-                variant="outlined"
-                fullWidth
-                sx={{ maxWidth: 250 }}
-                value={number}
-                onChange={(e) => setNumber(e.target.value)}
-            />
+        <Box sx={{ p: 2, display: 'flex', justifyContent: 'center' }}>
+            <Paper
+                elevation={3}
+                sx={{
+                    p: 4,
+                    borderRadius: 4,
+                    width: '100%',
+                    maxWidth: 600,
+                    backgroundColor: '#ffffff',
+                }}
+            >
+                <Typography variant="h4" component="h1" gutterBottom align="center" fontWeight="bold" color="primary">
+                    Conversor de bases 🔢
+                </Typography>
 
-            <TextField
-                label="Base"
-                variant="outlined"
-                sx={{ width: 80 }}
-                value={base}
-                onChange={(e) => setBase(e.target.value)}
-            />
+                <Stack direction="row" spacing={2} alignItems="center" justifyContent="center" sx={{ mt: 4 }}>
+                    <Stack spacing={2} sx={{ flex: 1 }}>
+                        <TextField
+                            label="Número"
+                            value={number}
+                            onChange={(e) => {
+                                const valorLimpo = e.target.value.replace(/[^0-9a-zA-Z]/g, '').toUpperCase()
+                                setNumber(valorLimpo)
+                            }}
+                            error={!!error}
+                            helperText={error || ' '} 
+                        />
+                        <TextField
+                            label="Base"
+                            type="number"
+                            value={base}
+                            onChange={(e) => setBase(e.target.value)}
+                        />
+                    </Stack>
 
-            <ArrowForwardIcon sx={{ fontSize: 40, color: "#555" }} />
+                    <SyncAltIcon color="action" sx={{ fontSize: 40 }} />
 
-            <TextField
-                label="Nova base"
-                variant="outlined"
-                sx={{ width: 80 }}
-                value={newBase}
-                onChange={(e) => setNewBase(e.target.value)}
-            />
-
-            <TextField
-                label="Resultado"
-                variant="outlined"
-                fullWidth
-                sx={{ maxWidth: 250 }}
-                value={result}
-                disabled
-            />
+                    <Stack spacing={2} sx={{ flex: 1 }}>
+                        <TextField
+                            label="Resultado"
+                            value={result}
+                            InputProps={{
+                                readOnly: true,
+                            }}
+                            sx={{
+                                '& .MuiInputBase-input': {
+                                    fontWeight: 'bold',
+                                    color: 'green',
+                                },
+                            }}
+                            helperText={error || ' '} 
+                        />
+                        <TextField
+                            label="Nova Base"
+                            type="number"
+                            value={newBase}
+                            onChange={(e) => setNewBase(e.target.value)}
+                        />
+                    </Stack>
+                </Stack>
+            </Paper>
         </Box>
     )
 }
