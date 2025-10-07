@@ -7,15 +7,15 @@ export const Home = () => {
     const [number, setNumber] = useState('1010')
     const [base, setBase] = useState('2')
     const [newBase, setNewBase] = useState('10')
-    
+
     const [result, setResult] = useState('')
     const [error, setError] = useState(null)
 
     useEffect(() => {
         const handler = setTimeout(() => {
-            const { 
-                result: convertedResult, 
-                error: conversionError 
+            const {
+                result: convertedResult,
+                error: conversionError
             } = convertNumber(number, base, newBase)
 
             setResult(convertedResult)
@@ -35,7 +35,7 @@ export const Home = () => {
                     p: 4,
                     borderRadius: 4,
                     width: '100%',
-                    maxWidth: 600,
+                    maxWidth: 1100,
                     backgroundColor: '#ffffff',
                 }}
             >
@@ -53,7 +53,7 @@ export const Home = () => {
                                 setNumber(valorLimpo)
                             }}
                             error={!!error}
-                            helperText={error || ' '} 
+                            helperText={error || ' '}
                         />
                         <TextField
                             label="Base"

@@ -1,6 +1,6 @@
 export const isEmpty = (array) => {
-    for(let index = 0; index < array.length; index++) {
-        let item = array[index]
+    for(let i = 0; i < array.length; i++) {
+        let item = array[i]
         if(item === '') {
             return true
         }

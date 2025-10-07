@@ -3,7 +3,7 @@ import { hasForbiddenDigits, isString, isEmpty } from './utils/index.js'
 export const convertNumber = (number, base, newBase) => {
     const chars = '0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZ'
     
-    if (!isString(number) || !isString(base) || !isString(newBase) || isEmpty([number, base, newBase])) {
+    if (!isString([number, base, newBase]) || isEmpty([number, base, newBase])) {
         return { result: '', error: 'Todos os campos são obrigatórios.' }
     }
 
